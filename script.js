@@ -26,50 +26,57 @@ function boldify() {
     document.getElementById("output-text").innerHTML = boldifiedText;
   } else if (inputFile) {
     var fileReader = new FileReader();
-
-    fileReader.onload = function(event) {
+  
+    fileReader.onload = function (event) {
       var fileContent = event.target.result;
-
+  
       if (inputFile.type === "application/pdf") {
-        pdfjsLib.getDocument({ data: fileContent }).promise.then(function(pdf) {
+        pdfjsLib.getDocument({ data: fileContent }).promise.then(function (pdf) {
           var numPages = pdf.numPages;
           var extractedText = "";
-
+  
           function extractPageText(pageNumber) {
             if (pageNumber > numPages) {
               var boldifiedText = boldifyText(extractedText);
               document.getElementById("output-text").innerHTML = boldifiedText;
               return;
             }
-
-            pdf.getPage(pageNumber).then(function(page) {
-              page.getTextContent().then(function(textContent) {
-                var pageText = textContent.items.map(function(item) {
-                  return item.str;
-                }).join(" ");
-
+  
+            pdf.getPage(pageNumber).then(function (page) {
+              page.getTextContent().then(function (textContent) {
+                var pageText = textContent.items
+                  .map(function (item) {
+                    return item.str;
+                  })
+                  .join(" ");
+  
                 extractedText += pageText + " ";
                 extractPageText(pageNumber + 1);
               });
             });
           }
-
+  
           extractPageText(1);
         });
-      } else if (inputFile.type === "application/msword" || inputFile.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+      } else if (
+        inputFile.type === "application/msword" ||
+        inputFile.type ===
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      ) {
         var reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
           var arrayBuffer = e.target.result;
           var converted = mammoth.extractRawText({ arrayBuffer: arrayBuffer });
-          converted.then(function(result) {
+          converted.then(function (result) {
             var boldifiedText = boldifyText(result.value);
             document.getElementById("output-text").innerHTML = boldifiedText;
+  
           });
         };
         reader.readAsArrayBuffer(inputFile);
       }
     };
-
+  
     fileReader.readAsArrayBuffer(inputFile);
   }
-}
+}  

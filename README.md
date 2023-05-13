@@ -1,2 +1,4 @@
 # boldify
-Boldifying text has the potential to assist neurodivergent individuals in reading faster and improving their reading experience. 
+Boldifying text has the potential to assist neurodivergent individuals in reading faster and improving their reading experience. By emphasizing the first half of words through bold formatting, it provides a visual cue that can enhance word recognition and aid in focusing attention on the text.
+
+For some neurodivergent individuals, this visual emphasis on the beginning of words can help reduce cognitive load and increase reading fluency. It may make it easier to identify and process words, leading to quicker comprehension and improved reading speed. The distinctive visual representation of boldified words can help neurodivergent individuals stay engaged and maintain focus while reading.
